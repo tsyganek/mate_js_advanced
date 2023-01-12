@@ -26,6 +26,7 @@ let newRobot = {};
 
         newRobot = Object.assign(newRobot, obj);
     }
+
     console.log(newRobot);
     return newRobot;
 }
