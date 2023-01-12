@@ -6,12 +6,12 @@
 
 function upgradeRobot(robot, parts) {
     let newRobot = robot;
-    const {...rest} = parts;
-
     for ( let i = 0; i < parts.length; i++) {
         newRobot  = Object.assign(robot, parts[i]);
-        console.log(newRobot);
     }
+
+    console.log(newRobot);
+    return newRobot;
 }
   
 
