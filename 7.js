@@ -14,7 +14,7 @@ function generateChart(statistics) {
     const values = Object.values(statistics);
     let sum = 0;
 
-    for (let value of values){
+    for (let value of values) {
         sum += value;
     }
 
@@ -25,7 +25,8 @@ function generateChart(statistics) {
     for (let entry of entries) {
         let obj = {};
         let key = entry[0];
-         obj[key] = Math.round(entry[1]/sum * 360);
+
+        obj[key] = Math.round(entry[1]/sum * 360);
         newStatistics = Object.assign(newStatistics, obj);
     }
 
