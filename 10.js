@@ -46,3 +46,44 @@
 //   {foo: 'bar', name: 'Jim'}
 // ].
 // the state variable must still contain {foo: 'bar', bar: 'foo'}.
+
+function transformStateWithClones(state, actions){
+ let newState = state;
+ let result = [];
+
+ for (const action of actions) {
+   if (action.type === 'addProperties') {
+    newState = Object.assign (newState, action.extraData);
+    let element = newState;
+    result.push(element);
+    console.log(result);
+   } 
+
+   if (action.type === 'clear') {
+    for (let prop in newState) {
+        if (newState.hasOwnProperty(prop)){
+            delete newState[prop];
+   }}
+  console.log(newState);}
+
+    if (action.type === 'removeProperties') {
+    for (let i = 0; i < action.keysToRemove.length; i++){
+        let key = action.keysToRemove[i];
+       delete newState[key];}
+       console.log(newState)
+    }
+    
+}
+
+console.log(result);
+return result;
+}
+
+
+const state = {foo: 'bar', bar: 'foo'}; 
+
+transformStateWithClones(state, [
+  {type: 'addProperties', extraData: {name: 'Jim', hello: 'world'}},
+  {type: 'removeProperties', keysToRemove: ['bar', 'hello']},
+  {type: 'addProperties', extraData: {another: 'one'}}
+])
