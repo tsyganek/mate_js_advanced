@@ -34,40 +34,35 @@ function fillTank(customer, fuelPrice, amount) {
     moneyPaid = 0;
    } else if (amount === undefined){
     if (availableCapacity <= moneyLimit){
-      amount = availableCapacity;
+      fuelQuantity = availableCapacity;
       moneyPaid = availableCapacity * fuelPrice;
-    customer.money = customer.money - moneyPaid;
     } else {
       fuelQuantity = moneyLimit;
       moneyPaid = moneyLimit * fuelPrice;
-      customer.money = customer.money - moneyPaid;
     }
    }
    else if (amount <= availableCapacity && moneyLimit >= amount){
     fuelQuantity = amount;
     moneyPaid = amount * fuelPrice;
-    customer.money = customer.money - moneyPaid;
    } 
    else if (amount <= availableCapacity && moneyLimit < amount && availableCapacity >= moneyLimit) {
     fuelQuantity = moneyLimit;
     moneyPaid = moneyLimit * fuelPrice;
-    customer.money = customer.money - moneyPaid;
    } 
    else if (amount <= availableCapacity && moneyLimit < amount && availableCapacity < moneyLimit) {
     fuelQuantity = availableCapacity;
     moneyPaid = availableCapacity * fuelPrice;
-    customer.money = customer.money - moneyPaid;
    } 
    else if (amount > availableCapacity) {
     if (availableCapacity <= moneyLimit){
       fuelQuantity = availableCapacity;
       moneyPaid = availableCapacity * fuelPrice;
-      customer.money = customer.money - moneyPaid;
     } else if (availableCapacity > moneyLimit) {
       fuelQuantity = moneyLimit;
       moneyPaid = moneyLimit * fuelPrice;
-      customer.money = customer.money - moneyPaid;
     }} 
+
+    customer.money = customer.money - moneyPaid;
 
     console.log (fuelQuantity);
     console.log (moneyPaid);
@@ -87,9 +82,9 @@ const customer = {
         fuelRemains: 8, // Залишок палива у баку
       }}
 
-fillTank(customer, 15, 31)
-fillTank(customer, 15, 1)
-fillTank(customer, 15, 45)
+// fillTank(customer, 15, 31)
+// fillTank(customer, 15, 1)
+// fillTank(customer, 15, 45)
 fillTank(customer, 15)
-fillTank(customer, 15, 22)
+// fillTank(customer, 15, 22)
 
