@@ -70,6 +70,7 @@ function transformState (state, actions) {
             }
         }
         } else if ( action.type === 'removeProperties') {
+       
             // console.log(action.keysToRemove)
             for (let i = 0; i < action.keysToRemove.length; i++){
                 // console.log(action.keysToRemove[i])

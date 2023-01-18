@@ -47,36 +47,31 @@
 // ].
 // the state variable must still contain {foo: 'bar', bar: 'foo'}.
 
-function transformStateWithClones(state, actions){
- let newState = state;
- let result = [];
+function transformStateWithClones(state, actions) {
+    let res = [];
+    let newState = {...state};
+    let result = state;
 
- for (const action of actions) {
-   if (action.type === 'addProperties') {
-    newState = Object.assign (newState, action.extraData);
-    let element = newState;
-    result.push(element);
-    console.log(result);
-   } 
+    for (let action of actions) {
+       this["result"+1];
+       console.log(this["result"+1]);
 
-   if (action.type === 'clear') {
-    for (let prop in newState) {
-        if (newState.hasOwnProperty(prop)){
-            delete newState[prop];
-   }}
-  console.log(newState);}
+        switch(action.type){
+            case "addProperties": 
+            let newState = {...state, ...extraData};
+            this["result"+1] = newState;
+            res.push(newState);
+            break;
 
-    if (action.type === 'removeProperties') {
-    for (let i = 0; i < action.keysToRemove.length; i++){
-        let key = action.keysToRemove[i];
-       delete newState[key];}
-       console.log(newState)
+            case "clear": 
+            let clearState = 
+            break;
+
+            case "removeProperties":
+            break;}
+
+       
     }
-    
-}
-
-console.log(result);
-return result;
 }
 
 
@@ -87,3 +82,37 @@ transformStateWithClones(state, [
   {type: 'removeProperties', keysToRemove: ['bar', 'hello']},
   {type: 'addProperties', extraData: {another: 'one'}}
 ])
+
+
+    //  [{foo: 'bar', bar: 'foo', yet: 'another property'},
+    //   {},
+    //   {foo: 'bar', name: 'Jim'}
+    // ].
+
+
+
+
+  // for (let i = 0; i < actions.length; i++) {
+
+    //     switch(actions[i].type){
+
+    //         case "addProperties": 
+    //         newState = Object.assign(newState, actions[i].extraData);
+    //         break;
+
+    //         case "clear":
+    //         for(let prop in newState) {
+    //             delete newState[prop];}   
+    //         break;
+
+    //         case 'removeProperties':
+    //             let keys = actions[i].keysToRemove;
+    //             for (let key of keys){
+    //                 console.log(key);
+    //                 console.log(newState.key);
+    //                 delete newState.key;}
+    //         break;
+    //         }
+    //     }
+
+   
