@@ -24,6 +24,7 @@
 // Вартість заправленого пального округли до сотих (до найближчого значення).'
 
 function fillTank(customer, fuelPrice, amount) {
+  amount = Math.floor(amount * 10) / 10;
   const availableCapacity
   = customer.vehicle.maxTankCapacity - customer.vehicle.fuelRemains;
   const moneyLimit = customer.money / fuelPrice;
@@ -33,7 +34,7 @@ function fillTank(customer, fuelPrice, amount) {
   if (amount < 2 || moneyLimit < 2 || availableCapacity < 2) {
     fuelQuantity = 0;
     moneyPaid = 0;
-  } else if (amount === undefined) {
+  } else if (amount == undefined) {
     if (availableCapacity <= moneyLimit) {
       fuelQuantity = availableCapacity;
       moneyPaid = availableCapacity * fuelPrice;
@@ -62,28 +63,38 @@ function fillTank(customer, fuelPrice, amount) {
     }
   };
   fuelQuantity = Math.floor(fuelQuantity * 10) / 10;
+  moneyPaid = Math.round(moneyPaid * 100) / 100;
   customer.vehicle.fuelRemains = customer.vehicle.fuelRemains + fuelQuantity;
   customer.money = customer.money - moneyPaid;
 
   console.log (fuelQuantity);
+  console.log(customer.vehicle.fuelRemains);
   console.log(customer.money);
+  console.log(moneyPaid);
 }
 
 
+// const customer = {
+//       money: 3000, // залишок грошей на рахунку клієнта 
+//       vehicle: {
+//         maxTankCapacity: 40, // Об'єм бака
+//         fuelRemains: 8, // Залишок палива у баку
+//       }}
 
-
-
+// // fillTank(customer, 15, 31)
+// // fillTank(customer, 15, 1)
+// // fillTank(customer, 15, 45)
+// fillTank(customer, 15)
+// // fillTank(customer, 15, 22)
 
 const customer = {
-      money: 3000, // залишок грошей на рахунку клієнта 
-      vehicle: {
-        maxTankCapacity: 40, // Об'єм бака
-        fuelRemains: 8, // Залишок палива у баку
-      }}
+  money: 1000,
+  vehicle: {
+    maxTankCapacity: 65,
+    fuelRemains: 2,
+  },
+};
 
-// fillTank(customer, 15, 31)
-// fillTank(customer, 15, 1)
-// fillTank(customer, 15, 45)
-fillTank(customer, 15)
-// fillTank(customer, 15, 22)
+fillTank(customer, 10);
+
 
