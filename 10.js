@@ -48,40 +48,60 @@
 // the state variable must still contain {foo: 'bar', bar: 'foo'}.
 
 function transformStateWithClones(state, actions) {
-    let res = [];
-    let newState = {...state};
-    let result = state;
+   
+   let res = [];
+   let newState = state;
+   res[0] = newState;
 
-    for (let action of actions) {
-       this["result"+1];
-       console.log(this["result"+1]);
+   for (let i = 0; i < actions.length; i++) {
 
-        switch(action.type){
-            case "addProperties": 
-            let newState = {...state, ...extraData};
-            this["result"+1] = newState;
-            res.push(newState);
-            break;
-
-            case "clear": 
-            let clearState = 
-            break;
-
-            case "removeProperties":
-            break;}
+    switch (actions[i].type){
+      case 'addProperties':
+      let addRes = Object.assign(res[i], actions[i].extraData)
+      res[i+1] = {...addRes};
+      break;
 
        
+      case 'removeProperties':
+        let removeRes = res[i];
+        let keys = actions[i].keysToRemove;
+
+        for (let key of keys){
+          delete removeRes[key];}
+          res[i+1] = {...removeRes};
+          console.log(res[i]);
+          break;
+
+      case 'clear':
+        let clearRes = res[i];
+        for (let prop in clearRes){
+          delete clearRes[prop]
+        }
+        res[i+1] = {...clearRes};
+        break;
     }
-}
+   }
+  console.log(res.slice(0,res.length-1));
+  return res.slice(0,res.length-1);
+  }
+
+
 
 
 const state = {foo: 'bar', bar: 'foo'}; 
 
+// transformStateWithClones(state, [
+//   {type: 'addProperties', extraData: {name: 'Jim', hello: 'world'}},
+//   {type: 'removeProperties', keysToRemove: ['bar', 'hello']},
+//   {type: 'addProperties', extraData: {another: 'one'}}
+  
+// ])
+
 transformStateWithClones(state, [
-  {type: 'addProperties', extraData: {name: 'Jim', hello: 'world'}},
-  {type: 'removeProperties', keysToRemove: ['bar', 'hello']},
-  {type: 'addProperties', extraData: {another: 'one'}}
-])
+    {type: 'addProperties', extraData: {yet: 'another property'}},
+    {type: 'clear'},
+    {type: 'addProperties', extraData: {foo: 'bar', name: 'Jim'}}
+  ])
 
 
     //  [{foo: 'bar', bar: 'foo', yet: 'another property'},

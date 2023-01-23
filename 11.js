@@ -24,17 +24,17 @@
 // Вартість заправленого пального округли до сотих (до найближчого значення).'
 
 function fillTank(customer, fuelPrice, amount) {
-  amount = Math.floor(amount * 10) / 10;
+  const roundedAmount = Math.floor(amount * 10) / 10;
   const availableCapacity
   = customer.vehicle.maxTankCapacity - customer.vehicle.fuelRemains;
   const moneyLimit = customer.money / fuelPrice;
   let fuelQuantity;
   let moneyPaid;
 
-  if (amount < 2 || moneyLimit < 2 || availableCapacity < 2) {
+  if (roundedAmount < 2 || moneyLimit < 2 || availableCapacity < 2) {
     fuelQuantity = 0;
     moneyPaid = 0;
-  } else if (amount == undefined) {
+  } else if (amount === undefined) {
     if (availableCapacity <= moneyLimit) {
       fuelQuantity = availableCapacity;
       moneyPaid = availableCapacity * fuelPrice;
@@ -42,18 +42,19 @@ function fillTank(customer, fuelPrice, amount) {
       fuelQuantity = moneyLimit;
       moneyPaid = moneyLimit * fuelPrice;
     }
-  } else if (amount <= availableCapacity && moneyLimit >= amount) {
-    fuelQuantity = amount;
-    moneyPaid = amount * fuelPrice;
-  } else if (amount <= availableCapacity
-  && moneyLimit < amount && availableCapacity >= moneyLimit) {
+  } else if (roundedAmount <= availableCapacity
+  && moneyLimit >= roundedAmount) {
+    fuelQuantity = roundedAmount;
+    moneyPaid = roundedAmount * fuelPrice;
+  } else if (roundedAmount <= availableCapacity
+  && moneyLimit < roundedAmount && availableCapacity >= moneyLimit) {
     fuelQuantity = moneyLimit;
     moneyPaid = moneyLimit * fuelPrice;
-  } else if (amount <= availableCapacity
-  && moneyLimit < amount && availableCapacity < moneyLimit) {
+  } else if (roundedAmount <= availableCapacity
+  && moneyLimit < roundedAmount && availableCapacity < moneyLimit) {
     fuelQuantity = availableCapacity;
     moneyPaid = availableCapacity * fuelPrice;
-  } else if (amount > availableCapacity) {
+  } else if (roundedAmount > availableCapacity) {
     if (availableCapacity <= moneyLimit) {
       fuelQuantity = availableCapacity;
       moneyPaid = availableCapacity * fuelPrice;
@@ -66,13 +67,7 @@ function fillTank(customer, fuelPrice, amount) {
   moneyPaid = Math.round(moneyPaid * 100) / 100;
   customer.vehicle.fuelRemains = customer.vehicle.fuelRemains + fuelQuantity;
   customer.money = customer.money - moneyPaid;
-
-  console.log (fuelQuantity);
-  console.log(customer.vehicle.fuelRemains);
-  console.log(customer.money);
-  console.log(moneyPaid);
 }
-
 
 // const customer = {
 //       money: 3000, // залишок грошей на рахунку клієнта 
