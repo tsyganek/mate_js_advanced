@@ -49,19 +49,18 @@
 
 function transformStateWithClones(state, actions) {
    
+  let newState = state;
    let res = [];
-   let newState = state;
    res[0] = newState;
 
    for (let i = 0; i < actions.length; i++) {
 
     switch (actions[i].type){
       case 'addProperties':
-      let addRes = Object.assign(res[i], actions[i].extraData)
+      let addRes = Object.assign(res[i], actions[i].extraData);
       res[i+1] = {...addRes};
       break;
 
-       
       case 'removeProperties':
         let removeRes = res[i];
         let keys = actions[i].keysToRemove;
@@ -81,14 +80,16 @@ function transformStateWithClones(state, actions) {
         break;
     }
    }
-  console.log(res.slice(0,res.length-1));
-  return res.slice(0,res.length-1);
+ 
+  res = res.slice(0,res.length-1);
+  console.log(res);
+  return res;
   }
 
 
 
 
-const state = {foo: 'bar', bar: 'foo'}; 
+// const state = {foo: 'bar', bar: 'foo'}; 
 
 // transformStateWithClones(state, [
 //   {type: 'addProperties', extraData: {name: 'Jim', hello: 'world'}},
@@ -97,11 +98,11 @@ const state = {foo: 'bar', bar: 'foo'};
   
 // ])
 
-transformStateWithClones(state, [
-    {type: 'addProperties', extraData: {yet: 'another property'}},
-    {type: 'clear'},
-    {type: 'addProperties', extraData: {foo: 'bar', name: 'Jim'}}
-  ])
+// transformStateWithClones(state, [
+//     {type: 'addProperties', extraData: {yet: 'another property'}},
+//     {type: 'clear'},
+//     {type: 'addProperties', extraData: {foo: 'bar', name: 'Jim'}}
+//   ])
 
 
     //  [{foo: 'bar', bar: 'foo', yet: 'another property'},
@@ -110,29 +111,95 @@ transformStateWithClones(state, [
     // ].
 
 
+    // const state = {};
 
+    // transformStateWithClones(state, [
+    //     {
+    //       type: 'addProperties', extraData: { name: 'Jim' },
+    //     },
+    //   ])
 
-  // for (let i = 0; i < actions.length; i++) {
-
-    //     switch(actions[i].type){
-
-    //         case "addProperties": 
-    //         newState = Object.assign(newState, actions[i].extraData);
-    //         break;
-
-    //         case "clear":
-    //         for(let prop in newState) {
-    //             delete newState[prop];}   
-    //         break;
-
-    //         case 'removeProperties':
-    //             let keys = actions[i].keysToRemove;
-    //             for (let key of keys){
-    //                 console.log(key);
-    //                 console.log(newState.key);
-    //                 delete newState.key;}
-    //         break;
-    //         }
-    //     }
 
    
+//     const state = {};
+
+// transformStateWithClones(state, [
+//     {
+//       type: 'addProperties',
+//       extraData: {
+//         name: 'Jim', hello: 'world',
+//       },
+//     },
+//   ])
+      // {
+      //   name: 'Jim', hello: 'world',
+      // },
+
+      //   const state = {};
+      
+      // transformStateWithClones(state, [
+      //     {
+      //       type: 'addProperties',
+      //       extraData: {
+      //         name: 'Jim', hello: 'world',
+      //       },
+      //     },
+      //   ])
+        
+ 
+        //   const state = { foo: 'bar' };
+        
+        //  transformStateWithClones(state, [
+        //     {
+        //       type: 'removeProperties', keysToRemove: ['foo'],
+        //     },
+        //   ])
+
+
+          const state = {
+            foo: 'bar', name: 'Jim', another: 'one',
+          };
+        
+     transformStateWithClones(state, [
+            {
+              type: 'removeProperties', keysToRemove: ['another'],
+            },
+            { type: 'clear' },
+            { type: 'clear' },
+            { type: 'clear' },
+            {
+              type: 'addProperties', extraData: { yet: 'another property' },
+            },
+            { type: 'clear' },
+            {
+              type: 'addProperties',
+              extraData: {
+                foo: 'bar', name: 'Jim',
+              },
+            },
+            {
+              type: 'removeProperties', keysToRemove: ['name', 'hello'],
+            },
+          ])
+
+          
+            //   [{
+            //     foo: 'bar', name: 'Jim',
+            //   },
+            //   {},
+            //   {},
+            //   {},
+            //   { yet: 'another property' },
+            //   {},
+            //   {
+            //     foo: 'bar', name: 'Jim',
+            //   },
+            //   { foo: 'bar' },
+            // ]
+        
+        //   expect(state)
+        //     .toEqual({
+        //       foo: 'bar', name: 'Jim', another: 'one',
+        //     });
+        // });
+        
