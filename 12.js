@@ -20,11 +20,16 @@
  * 
  *  - Movement methods must be able to be used with a chain.
  *    robot.goForward().goForward().goForward().goLeft()
+ * 
  *  - Default methods that move the work by 1 in the right direction.
+ * 
  *    This value can be increased by passing the desired number to the method.
+ * 
  *    Negative numbers should not affect the location of the robot. goLeft(3)
+ * 
  *  - The coordinates of the robot must be stored in the object coords,
  *    the keys x and y inside the robot.
+ 
  *  - The robot must be able to request the evacuation of robot.evacuate(),
  *    which will call rescuers and transfer it to the service center
  *    at the coordinates x: 1400, y: 500.
@@ -35,24 +40,77 @@ function makeRobot(name, wheels, version) {
     name: name,
     wheels: wheels,
     version: version, 
+    coords: {
+      x: 14,
+      y: 21,
+    },
    
      get info() {
         return `name:${this.name}, chip version: ${this.version}, wheels:${this.wheels}`
      },
 
      get location() {
-      return `${this.name}: x=14, y=21`
+      return `${this.name}: x=${this.x}, y=${this.y}`
    },
 
-   goForward() {},
-   goBack() {}, 
-   goRight() {}, 
-   goLeft() {},
+   goForward() {
+      this.coords.y +=1;
+   return this},
+   goBack() {  
+      this.coords.y -=1;
+      return this}, 
+   goRight() {
+      this.coords.x +=1;
+      return this}, 
+   goLeft() {
+      this.coords.x -=1;
+      return this},
+
+   set getForward(value) {
+       if (value >= 0) {
+        return this.coords.y += value;
+       } else return;
+      },
+
+       set getBack(value) {
+         if (value >= 0) {
+            return this.coords.y -= value;
+           } else return;
+        },
+
+        set getLeft(value) {
+         if (value >= 0) {
+            return this.coords.x -= value;
+           } else return;
+        },
+
+        set getRight(value) {
+         if (value >= 0) {
+            return this.coords.x += value;
+           } else return;
+        },
+
+        get evacuate() {
+         this.coords.x = 1400;
+         this.coords.y = 500;
+         return this.coords;
+        }
+   };
+
+   robot.getForward = 12;
+   robot.getLeft = 15;
+   robot.evacuate;
+
+   console.log(robot.coords);
+
+
 
    }
 
-   console.log(robot.location);
-}
+
+
 
 
 makeRobot('Joy', 5, 31);
+
+
