@@ -12,9 +12,12 @@
  * The robot coming off the assembly line must be able to:
  *  - Provide information about yourself through getter info.
  *    robot.info === 'name:%name%, chip version: %version%, wheels: %wheels%'
+ * 
  *  - Provide the coordinates of your location via getter location.
  *    robot.location === '%name%: x=14, y=21'
+ * 
  *  - Have methods to move goForward, goBack, goRight, goLeft.
+ * 
  *  - Movement methods must be able to be used with a chain.
  *    robot.goForward().goForward().goForward().goLeft()
  *  - Default methods that move the work by 1 in the right direction.
@@ -28,7 +31,28 @@
  * */
  
 function makeRobot(name, wheels, version) {
+   let robot = {
+    name: name,
+    wheels: wheels,
+    version: version, 
+   
+     get info() {
+        return `name:${this.name}, chip version: ${this.version}, wheels:${this.wheels}`
+     },
 
-    
+     get location() {
+      return `${this.name}: x=14, y=21`
+   },
 
+   goForward() {},
+   goBack() {}, 
+   goRight() {}, 
+   goLeft() {},
+
+   }
+
+   console.log(robot.location);
 }
+
+
+makeRobot('Joy', 5, 31);

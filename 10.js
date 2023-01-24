@@ -49,7 +49,7 @@
 
 function transformStateWithClones(state, actions) {
    
-  let newState = state;
+  let newState = { ...state };
    let res = [];
    res[0] = newState;
 
