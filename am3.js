@@ -5,29 +5,35 @@
 
 const numbers = [143, 7, 43, 143, 11, 50, 7];
 
-numbers.indexOf = function(value, searchStart) {
+numbers.indexOf = function(value, fromIndex) {
     let start;
   
-    if (searchStart === undefined) {
+    if (fromIndex === undefined) {
       start = 0;
-    } else if (searchStart < 0 && searchStart > -this.length) {
-      start = numbers.length + searchStart;
-    } else if (searchStart < 0 && searchStart < -this.length) {
-      start = 0;
-    } else if (searchStart > 0 && searchStart <= this.length) {
-      start = searchStart;
-    } else {
+    }
+  
+    if (fromIndex >= 0 && fromIndex < this.length) {
+      start = fromIndex;
+    }
+  
+    if (fromIndex > 0 && fromIndex > this.length) {
       return -1;
     }
-    console.log('start', start);
+  
+    if (fromIndex < 0 && fromIndex > -this.length) {
+      start = this.length + fromIndex;
+    }
+  
+    if (fromIndex < 0 && fromIndex < -this.length) {
+      start = 0;
+    }
   
     for (let i = start; i < this.length; i++) {
       if (this[i] === value) {
-        console.log('index',i);
         return i;
       };
     }
-   console.log(-1)
+  
     return -1;
   };
   
