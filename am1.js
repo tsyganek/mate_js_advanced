@@ -17,13 +17,12 @@
 let numbers = [1,2,3];
 
 numbers.push = function(...args){
-  let arrArgs = args;
-  console.log(arrArgs)
+  const arrArgs = args;
 
-  for (let i = 0; i < arrArgs.length; i++){
-    this[this.length + i] = arrArgs[i];
+  for (let i = 0; i < arrArgs.length; i++) {
+    this[this.length] = arrArgs[i];
   }
-  console.log(numbers);
+
   return this.length;
   }
 
