@@ -4,14 +4,40 @@
  * Implement method join
  */
 
-source = [0, 1, 2, 3];
+let source = [5,6,7];
 
-function applyCustomJoin() {
-  [].__proto__.join2 = function(separator) {
-    let string;
-    for (let i = 0; l < [].__proto__.length - 1; i++) {
-        string = string + [].__proto__[i] + separator;
-    }
-    string = string + [].__proto__[[].__proto__.length - 1]
-  };
+source.join2 = function(separator) {
+let str = "";
+let sep;
+
+if (separator === undefined) {
+    sep = ",";
+} else { sep = separator}
+
+if (this.length === 0){
+    str = 0;
+    console.log(str)
+   return str;
 }
+
+if (this.length === 1) {
+str = this[0];
+console.log(str)
+return str;
+}
+
+for (let i = 0; i < this.length - 1; i++){
+ str = str + this[i] + sep;
+}
+
+str = str + this[this.length - 1]
+
+console.log(str)
+return str
+
+}
+
+source.join2()
+source.join2(" ") 
+source.join2("-")
+source.join2('[object]')

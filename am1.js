@@ -17,19 +17,17 @@
 let numbers = [1,2,3];
 
 numbers.push = function(...args){
-  let newNumbers = numbers;
-  let length = numbers.length;
-  let argsArray = [...args];
+  let arrArgs = args;
+  console.log(arrArgs)
 
-  for (let i = 0; i < argsArray.length; i++ ){
-    newNumbers[length+i] = argsArray[i];
+  for (let i = 0; i < arrArgs.length; i++){
+    this[this.length + i] = arrArgs[i];
   }
-  console.log(newNumbers);
-  console.log(newNumbers.length);
-
+  console.log(numbers);
+  return this.length;
   }
 
-numbers.push(72);
+numbers.push(72, 15, 47);
 
 // const newNumbers = [...numbers, ...args];
 // const newLength = newNumbers.length;
