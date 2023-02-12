@@ -21,9 +21,10 @@ function searchRobot (robot, workPlaces){
         let staff = workPlace.staff;
        
         if (staff.includes(robot.name)) {
-            console.log(workPlace.name);
+            return workPlace.name;
         }
-    }}
+    }
+}
 
   searchRobot(robot, workPlaces) // повертає 'Google';
   
