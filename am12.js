@@ -11,7 +11,9 @@ const wish = `I want a short stylish haircut, like my brother's`;
 function getOrder (wish, num) {
     let wishArr = wish.split(" ");
     wishArr = wishArr.splice(0, num);
-  return wishArr
+    let string = wishArr.join(' ');
+
+    return string
 
 }
 getOrder(wish, 4); // 'I want a short'
