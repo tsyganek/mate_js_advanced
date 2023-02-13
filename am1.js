@@ -28,7 +28,3 @@ numbers.push = function(...args){
 
 numbers.push(72, 15, 47);
 
-// const newNumbers = [...numbers, ...args];
-// const newLength = newNumbers.length;
-
-// return newLength;
