@@ -4,8 +4,9 @@ const numbers = [5, 6, 1, 4, 2, 5];
 
 numbers.reverse = function() {
    let n = this.length - 1;
+   console.log(n)
 
-   for (let i = 0; i<= n/2; i++) {
+   for (let i = 0; i <= n/2; i++) {
      let temp = this[i];
      this[i] = this[n-i];
      this[n-i] = temp;
